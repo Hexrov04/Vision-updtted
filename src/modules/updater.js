@@ -9,7 +9,7 @@ const link = require('terminal-link');
 
 module.exports = async () => {
 	if (!config.updater) return;
-	const json = await (await fetch('https://api.github.com/repos/eartharoid/DiscordTickets/releases')).json();
+	const json = await (await fetch('https://api.github.com/repos/Retry6760/vision-updtted/')).json();
 	const update = json[0];
 	let notice = [];
 
@@ -18,7 +18,7 @@ module.exports = async () => {
 
 		notice.push(`&6You are currently using &c${version}&6, the latest is &a${update.tag_name}&6.`);
 		notice.push(`&6Download "&f${update.name}&6" from`);
-		notice.push(link('&6the GitHub releases page', 'https://github.com/eartharoid/DiscordTickets/releases/'));
+		notice.push(link('&6the GitHub releases page', 'https://github.com/Retry6760/Vision-updtted/'));
 
 		console.log(
 			boxen(log.f(notice.join('\n')), {
@@ -30,4 +30,4 @@ module.exports = async () => {
 			})
 		);
 	}
-};
+}
