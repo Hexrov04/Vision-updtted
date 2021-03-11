@@ -1,0 +1,9 @@
+first, go to user, then  .env
+
+go to discord dev portal and enter your discord bot token where it says token= || NO SPACE
+
+then, go to config.js
+
+you will see a bunch of code, inside of each '' that has required next to it enter the text needed(ex, support role id: 4838434384)
+
+if you have any questions dm me.
