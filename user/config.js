@@ -44,6 +44,7 @@ module.exports = {
 	cooldown: 3,
 	guild: '', // ID of your guild (REQUIRED)
 	staff_role: '', // ID of your Support Team role (REQUIRED)
+	mod_log: '',
 
 
 	tickets: {
@@ -118,5 +119,5 @@ module.exports = {
 	},
 
 	debug: false,
-	updater: false //work in progress
+	updater: true 
 };

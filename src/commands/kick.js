@@ -1,33 +1,40 @@
-const { MessageEmbed, Message, MessageAttachment } = require('discord.js');
-const fs = require('fs');
-const { join } = require('path');
-const config = require(join(__dirname, '../../user/', require('../').config));
+const Discord = require('discord.js');
 
 module.exports = {
-	name: 'new',
-	description: 'Create a new support ticket',
-	usage: '[brief description]',
-	aliases: ['ticket', 'open'],
-	example: 'new my server won\'t start',
+	name: 'kick',
+	description: 'kicks a user',
+	usage: '[command]',
+	aliases: ['command', 'commands'],
+	example: 'kick v8',
 	args: false,
-	disabled: !config.commands.new.enabled,
-	async execute(client, message, args, log, { config, Ticket }) {
-    if(!message.mebmer.hasPermission('KICK_MEMBERS')) return message.channel.send('You cant use this command.')
-    const mentionMember = message.mentions.member.first() || message.guild.members.cache.get(_args[0])
-    if (!mentionMember) return message.channel.send(`${message.author.tag}, \n you need to mention a member.`)
-    if(mentionMember.id == message.author.id) return message.channel.send('Please dont pull a hex and try to kick yourself.')
-    if(mentionMember.id == client.user.id) return message.channel.send('You cant kick me.')
-    try {
-      await mentionMember.kick()
-      message.channel.send(`Successfully kicked ${mentionMember}.`)
-    } catch(e) {
-      return message.channel.send('There was an error. I will attempt to fix it automatically.')
-      
-    }
-    if(e) await mentionMember.kick() 
-      message.channel.send('Fixed the error and kicked the user.')
-    
-  
-  }
+	execute(client, message, args, log, { config }) {
+        if(!message.member.hasPermission('KICK_MEMBERS')) return message.reply('You can\'t use that.');
+        const logChannel = client.guilds.cache.get(config.mod_log);
 
+        let target = message.mentions.users.first();
+        let mtarget = message.guild.member(target);
+        
+        if(!target) return message.channel.send('Pick somebody');
+
+        if(mtarget.roles.highest.position >= message.member.roles.highest.position) return message.channel.send('You cannot kick someone equal to or higher than yourself.');
+
+        let reason = args.slice(1).join(' ') || 'Don\'t forget a reason.';
+
+        const kickEmbed = new Discord.MessageEmbed()
+            .setColor('RED')
+            .setTitle('Kicked')
+            .setAuthor(message.guild.name, message.guild.iconURL())
+            .setThumbnail(target.displayAvatarURL())
+            .addFields(
+                {name: 'ID', value: target.id, inline: true},
+                {name: 'Name', value: target.username, inline: true},
+                {name: 'Moderator', value: message.member},
+                {name: 'When', value: message.createdAt.toLocaleString(), inline: true},
+                {name: 'Reason', value: reason}
+            )
+
+        mtarget.kick();
+        message.channel.send(kickEmbed);
+        client.channels.cache.get(logChannel).send(kickEmbed);
+    }
 }

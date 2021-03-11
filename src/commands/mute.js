@@ -1,47 +1,60 @@
-const Discord = require('discord.js')
-
+const Discord = require('discord.js');
 
 module.exports = {
-	name: 'mute',
-	description: 'Mutes a user.',
-	usage: '<@member>',
-	aliases: ['m'],
-	example: 'mute v8',
-	args: true,
-	async execute(client, message, _args, log, { config, Ticket }) {
-      
+    name: 'mute',
+    description: 'Mute a user.',
+    aliases: ['m'],
+    usage: '.mute <member> [reason]',
+    category: 'mod',
+    execute: async (client, message, args) => {
+        if(!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply('You can\'t use that.');
+        const logChannel = client.guilds.cache.get(config.mod_log);
 
-        
-            if (!message.member.hasPermission("MUTE_MEMBERS")) return message.channel.send('You do not have permission to mute.')
-            if (!message.guild.me.hasPermission("MANAGE_MESSAGES")) return message.channel.send('I require \`MANAGE_MESSAGES\`')
-   
-            let reason = _args.slice(1).join(" ")
-           const muteRole = message.guild.roles.cache.get('')
-           const memberRole = message.guild.roles.cache.get('')
-            const mentionedMember = message.mentions.members.first()
-            const muteEmbed = new Discord.MessageEmbed()
-            .setTitle(`You have been **__Muted__** in ${message.guild.name}`)
-            .setDescription(`Reason for being muted: ${reason}`)
-            .setColor("#5708ab")
-            .setTimestamp()
-           
-            const muteChannel = new Discord.MessageEmbed()
-            .setTitle(`** MUTED USER:**`)
-            .setDescription(`${mentionedMember} has been muted for: ${reason}`)
-            .setColor("#5708ab")
-            .setTimestamp()
-   
-            if(!_args[0]) return message.channel.send(`\`/mute @member reason\``)
-            if (!mentionedMember) return message.channel.send("The member stated is not in the server")
-            if (mentionedMember.user == message.author) return message.channel.send('`You cannot mute yourself`')
-            if (mentionedMember.user== client.user) return  message.channel.send('`You cant mute me.`')
-            if (!reason) reason = 'No reason given'
-            if (mentionedMember.roles.cache.has(muteRole)) return message.channel.send('This member is already muted.')
-            if (message.member.roles.highest.postition <= mentionedMember.roles.highest.postition) return message.channel.send('You cannot mute someone the same role or higher then you.')
-           await mentionedMember.send(muteEmbed).then((mentionedMember.guild.channels.cache.get('816367345702404126').send(muteChannel)))
-           await mentionedMember.roles.add(muteRole.id).catch(err => console.log(err).then(message.channel.send('there was an error giving the mute role')))
- 
-   
+        let target = message.mentions.users.first();
+        let mtarget = message.guild.member(target);
+
+        if(!target) return message.reply('Pick somebody.');
+
+        if(mtarget.roles.highest.position >= message.member.roles.highest.position) return message.channel.send('You cannot mute someone equal to or higher than yourself.');
+
+        let reason = args.slice(1).join(' ') || 'Don\'t forget a reason.';
+
+        let muted = message.guild.roles.cache.find(r => r.name === 'Muted');
+
+        if(!muted)  {
+            try {
+                muted = await message.guild.roles.create({
+                    data: { 
+                        name: 'Muted',
+                        color: '#000000',
+                        permissions: []
+                    }
+                })
+                message.guild.channels.cache.forEach(channel => {
+                    channel.createOverwrite(muted, {
+                        SEND_MESSAGES: false,
+                        ADD_REACTIONS: false
+                    })
+                })
+            } catch(e) {
+                console.log(e)
+            }
         }
-       }
-    
+
+        let muteEmbed = new Discord.MessageEmbed()
+        .setColor('RED')
+        .setTitle('Mute')
+        .setAuthor(message.guild.name, message.guild.iconURL())
+        .setThumbnail(target.displayAvatarURL())
+        .addFields(
+            {name: 'Name', value: target.username, inline: true},
+            {name: 'Moderator', value: message.member, inline: true},
+            {name: 'When', value: message.createdAt.toLocaleString()},
+            {name: 'Reason', value: reason},
+        )
+
+        mtarget.roles.add(muted.id);
+        message.channel.send(muteEmbed);
+        client.channels.cache.get(logChannel).send(muteEmbed);
+    }
+}
