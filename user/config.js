@@ -42,12 +42,12 @@ module.exports = {
 	colour: '#009999',
 	err_colour: 'RED',
 	cooldown: 3,
-	guild: '816365829812650005', // ID of your guild (REQUIRED)
-	staff_role: '816366410745512037', // ID of your Support Team role (REQUIRED)
+	guild: '', // ID of your guild (REQUIRED)
+	staff_role: '', // ID of your Support Team role (REQUIRED)
 
 
 	tickets: {
-		category: '816368366067515423', // ID of your tickets category (REQUIRED)
+		category: '', // ID of your tickets category (REQUIRED)
 		send_img: false,
 		ping: 'here',
 		text: `Hello there, {{ tag }}!
@@ -84,9 +84,9 @@ module.exports = {
 		},
 		web: {
 			enabled: false,
-			server: 'https://cupiddevv.000webhostapp.com/transcripts',
+			server: '',
 		},
-		channel: '816367394099560469' // ID of your archives channel
+		channel: '' // ID of your archives channel
 	},
 
 	panel: {
@@ -106,15 +106,15 @@ module.exports = {
 		},
 		discord: {
 			enabled: false,
-			channel: '816367345702404126' // ID of your log channel
+			channel: '' // ID of your log channel
 		}
 	},
 
 	roles: {
 		emoji: "✅ ",
-		roleID: "816494310479495199",
-		channelID: "819320296544403506",
-		messageID: "819402637480951810"
+		roleID: "",
+		channelID: "",
+		messageID: ""
 	},
 
 	debug: false,

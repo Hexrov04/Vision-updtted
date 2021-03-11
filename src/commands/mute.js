@@ -16,8 +16,8 @@ module.exports = {
             if (!message.guild.me.hasPermission("MANAGE_MESSAGES")) return message.channel.send('I require \`MANAGE_MESSAGES\`')
    
             let reason = _args.slice(1).join(" ")
-           const muteRole = message.guild.roles.cache.get('818099668738113586')
-           const memberRole = message.guild.roles.cache.get('816480819581157386')
+           const muteRole = message.guild.roles.cache.get('')
+           const memberRole = message.guild.roles.cache.get('')
             const mentionedMember = message.mentions.members.first()
             const muteEmbed = new Discord.MessageEmbed()
             .setTitle(`You have been **__Muted__** in ${message.guild.name}`)

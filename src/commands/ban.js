@@ -51,7 +51,7 @@ await mentionedMember.ban ({
     setTimeout(function(){
         message.delete()
     }, 5000)
-}).then(message.channel.bulkDelete(1)).then(mentionedMember.guild.channels.cache.get('816367345702404126').send(banEmbed2)))
+}).then(message.channel.bulkDelete(1)).then(mentionedMember.guild.channels.cache.get('').send(banEmbed2)))
 }
 
 }
