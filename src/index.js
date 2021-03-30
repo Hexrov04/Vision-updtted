@@ -27,7 +27,7 @@ client.on('guildMemberAdd', member => {
 	// Do nothing if the channel wasn't found on this server
 	if (!channel) return;
 	// Send the message, mentioning the member
-	channel.send(`Welcome to the server, ${member}!`);
+	channel.send(`Welcome to the server, ${member}! \ncheck out these fast links:\n <#818609533336420353> <#817998803998474260> `);
   });
 
 client.events = new Discord.Collection();
@@ -170,6 +170,7 @@ process.on('unhandledRejection', error => {
 	log.warn(`Uncaught ${error.name}: ${error.message}`);
 	log.error(error);
 });
+
 
 
 

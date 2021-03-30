@@ -1,6 +1,7 @@
 
 const Logger = require('leekslazylogger');
 const log = new Logger();
+
 const config = require('../../user/' + require('../').config);
 
 module.exports = {

@@ -30,7 +30,7 @@ module.exports = {
             })
         }catch (err) {
             console.log(err)
-            message.channel.send(`I was unable to delete the amount stated. Make sure they are within 14 days old.`)
+            message.channel.send(`I was unable to delete the amount stated. Make sure they are within 14 days old.`).then(msg => msg.delete({ timeout: 1000 }));
         }
     }
 }

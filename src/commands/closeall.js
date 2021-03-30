@@ -236,6 +236,10 @@ module.exports = {
 							.setFooter(guild.name, guild.iconURL())
 							.setTimestamp();
 
+
+					
+
+
 						if (users.length > 1)
 							embed.addField('Members', users.map(u => `<@${u}>`).join('\n'));
 						

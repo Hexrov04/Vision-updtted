@@ -21,8 +21,8 @@
  * ###############################################################################################
  */
 
-module.exports = {
-	prefix: '.',
+ module.exports = {
+	prefix: 'a!',
 	name: 'TicketBot',
 	presences: [
 		{
@@ -42,13 +42,12 @@ module.exports = {
 	colour: '#009999',
 	err_colour: 'RED',
 	cooldown: 3,
-	guild: '', // ID of your guild (REQUIRED)
-	staff_role: '', // ID of your Support Team role (REQUIRED)
-	mod_log: '',
+	guild: '817835697234903152', // ID of your guild (REQUIRED)
+	staff_role: '818938992724017152', // ID of your Support Team role (REQUIRED)
 
 
 	tickets: {
-		category: '', // ID of your tickets category (REQUIRED)
+		category: '818588875579981864', // ID of your tickets category (REQUIRED)
 		send_img: false,
 		ping: 'here',
 		text: `Hello there, {{ tag }}!
@@ -87,7 +86,7 @@ module.exports = {
 			enabled: false,
 			server: '',
 		},
-		channel: '' // ID of your archives channel
+		channel: '818589058023424030' // ID of your archives channel
 	},
 
 	panel: {
@@ -107,15 +106,15 @@ module.exports = {
 		},
 		discord: {
 			enabled: false,
-			channel: '' // ID of your log channel
+			channel: '817999012107780107' // ID of your log channel
 		}
 	},
 
 	roles: {
-		emoji: "✅ ",
-		roleID: "",
-		channelID: "",
-		messageID: ""
+		emoji: ":flag_us:",
+		roleID: "817851257371754538",
+		channelID: "817850978212511796",
+		messageID: "817854297538560062"
 	},
 
 	debug: false,

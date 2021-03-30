@@ -14,6 +14,17 @@ module.exports = {
 	args: false,
 	async execute(client, message, _args, log, { config, Ticket }) {
 		const guild = client.guilds.cache.get(config.guild);
+		if (!message.member.roles.cache.has(config.staff_role))
+			return message.channel.send(
+				new MessageEmbed()
+					.setColor(config.err_colour)
+					.setAuthor(message.author.username, message.author.displayAvatarURL())
+					.setTitle('❌ **No permission**')
+					.setDescription('You do not have permission to use this command as you are not a staff member.')
+					.addField('Usage', `\`${config.prefix}${this.name}${' ' + this.usage}\`\n`)
+					.addField('Help', `Type \`${config.prefix}help ${this.name}\` for more information`)
+					.setFooter(guild.name, guild.iconURL())
+			);
 
 		const notTicket = new MessageEmbed()
 			.setColor(config.err_colour)

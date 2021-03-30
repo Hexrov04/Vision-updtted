@@ -1,4 +1,5 @@
 const Discord = require('discord.js');
+const config = require('../../user/config')
 
 module.exports = {
     name: 'mute',
