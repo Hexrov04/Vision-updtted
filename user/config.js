@@ -49,7 +49,7 @@
 	tickets: {
 		category: '818588875579981864', // ID of your tickets category (REQUIRED)
 		send_img: false,
-		ping: 'here',
+		ping: '818938992724017152',
 		text: `Hello there, {{ tag }}!
 		A member of staff will assist you shortly.
 			`,
@@ -110,12 +110,6 @@
 		}
 	},
 
-	roles: {
-		emoji: ":flag_us:",
-		roleID: "817851257371754538",
-		channelID: "817850978212511796",
-		messageID: "817854297538560062"
-	},
 
 	debug: false,
 	updater: true 
